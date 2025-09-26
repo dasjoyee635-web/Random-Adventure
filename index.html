@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Random Adventure Generator</title>
+<style>
+  /* ---------- Reset & Base ---------- */
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg,#1e1e2f,#0f0f1f);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height:100vh;
+    overflow:hidden;
+  }
+
+  /* ---------- Card ---------- */
+  .card{
+    background: rgba(255,255,255,0.05);
+    border-radius: 20px;
+    padding: 30px;
+    width: 90%;
+    max-width: 600px;
+    text-align:center;
+    position:relative;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    overflow:hidden;
+  }
+
+  /* Animated Background Shapes */
+  .bg-shape{
+    position:absolute;
+    border-radius:50%;
+    filter: blur(80px);
+    opacity:0.2;
+    animation: float 12s ease-in-out infinite;
+  }
+  .bg-shape.s1{width:300px;height:300px;top:-50px;left:-80px;background:linear-gradient(45deg,#ff6b6b,#f5d547);}
+  .bg-shape.s2{width:250px;height:250px;bottom:-60px;right:-50px;background:linear-gradient(45deg,#6bffb1,#3c91ff);animation-duration:10s;}
+
+  @keyframes float{
+    0%,100%{transform: translateY(0px) rotate(0deg);}
+    50%{transform: translateY(30px) rotate(45deg);}
+  }
+
+  /* ---------- Button ---------- */
+  button{
+    padding: 14px 28px;
+    font-size: 1rem;
+    margin-top:20px;
+    border:none;
+    border-radius:12px;
+    background: linear-gradient(45deg,#ff6b6b,#f5d547);
+    color:#000;
+    cursor:pointer;
+    transition: 0.3s;
+  }
+  button:hover{transform: scale(1.05);}
+
+  /* ---------- Adventure Text ---------- */
+  .adventure{
+    font-size:1.3rem;
+    margin-top:20px;
+    min-height:60px;
+    transition: all 0.5s ease;
+  }
+
+  /* Copy button */
+  .copy-btn{
+    margin-top:15px;
+    background: linear-gradient(45deg,#6bffb1,#3c91ff);
+    color:#000;
+  }
+
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>Random Adventure Generator ✨</h1>
+    <p>Click below to get a mini adventure for today!</p>
+    <button id="generateBtn">🎲 Generate Adventure</button>
+    <div class="adventure" id="adventureText"></div>
+    <button class="copy-btn" id="copyBtn">📋 Copy Adventure</button>
+
+    <div class="bg-shape s1"></div>
+    <div class="bg-shape s2"></div>
+  </div>
+
+<script>
+  const adventures = [
+    "Take a 15-min walk and photograph 3 unusual things.",
+    "Try cooking a dish you've never made before.",
+    "Write a short 50-word story about your day.",
+    "Call an old friend and share a memory.",
+    "Draw something with your non-dominant hand.",
+    "Learn one new word in a foreign language.",
+    "Watch the sunset and note 3 things you’re grateful for.",
+    "Try a new music genre and make a mini playlist.",
+    "Rearrange one corner of your room creatively.",
+    "Do a random act of kindness for a stranger.",
+    "Sketch a doodle inspired by your favorite song.",
+    "Spend 10 minutes meditating and focus on breathing.",
+    "Create a tiny poem with 4 lines about your mood.",
+    "Try a new coffee/tea recipe today.",
+    "Write down 3 goals for tomorrow."
+  ];
+
+  const generateBtn = document.getElementById('generateBtn');
+  const adventureText = document.getElementById('adventureText');
+  const copyBtn = document.getElementById('copyBtn');
+
+  generateBtn.addEventListener('click', () => {
+    const randomIndex = Math.floor(Math.random() * adventures.length);
+    adventureText.textContent = adventures[randomIndex];
+  });
+
+  copyBtn.addEventListener('click', () => {
+    const text = adventureText.textContent;
+    if(text){
+      navigator.clipboard.writeText(text).then(() => {
+        copyBtn.textContent = "✅ Copied!";
+        setTimeout(()=>{copyBtn.textContent="📋 Copy Adventure"},1500);
+      });
+    }
+  });
+</script>
+</body>
+</html>
