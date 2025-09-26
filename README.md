@@ -21,4 +21,5 @@ A fun and interactive website that generates **mini adventures** for your day! C
 ## 🚀 How to Use
 
 1. Clone the repository:
+   https://dasjoyee635-web.github.io/Random-Adventure/
 
